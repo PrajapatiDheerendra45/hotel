@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .column {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        /* height: 300px; */
+      }
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      /* .row {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      } */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      div {
+        margin-bottom: 10px;
+      }
+
+      label {
+        margin-right: 10px;
+        padding: 40px;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ccc;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: center;
+      }
+
+      #invoiceTotal {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Invoice Generator</h1>
+    <div class="row">
+      <div class="column">
+        <label for="item"> Customer Name:</label>
+        <input type="text" class="item" />
+        <label for="item">Mobile no:</label>
+        <input type="text" class="item" />
+      </div>
+
+      <div class="column">
+        <label for="item">Address:</label>
+        <input type="text" class="item" />
+        <label for="item">Email:</label>
+        <input type="text" class="item" />
+      </div>
+      <div class="column">
+        <label for="item">Item:</label>
+        <input type="text" id="item" />
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" />
+      </div>
+      <div class="column">
+        <label for="price">Price:</label>
+        <input type="number" id="price" />
+        <label for="discount">Discount (%):</label>
+        <input type="number" id="discount" />
+      </div>
+      <div class="column">
+        <label for="gst">GST(%):</label>
+        <input type="number" id="gst" />
+      </div>
+    </div>
+    <div>
+      <button onclick="addItem()">Add Item</button>
+    </div>
+    <div class="invoice-details">
+      <h2>Invoice Details</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Discount</th>
+            <th>GST</th>
+
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody id="invoiceItems"></tbody>
+      </table>
+      <div id="invoiceTotal">
+        <p>
+          Total Amount (including GST and discount):
+          <span id="totalAmount">0</span>
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const invoiceItems = [];
+
+      function addItem() {
+        const item = document.getElementsByClassName("item").value;
+        const quantity = parseInt(document.getElementById("quantity").value);
+        const price = parseFloat(document.getElementById("price").value);
+        const discount = parseFloat(document.getElementById("discount").value);
+        const gst = parseFloat(document.getElementById("gst").value);
+
+        if (!item || !quantity || !price || !gst || !discount) {
+          alert("Please fill in all the fields.");
+          return;
+        }
+
+        const total =
+          price * quantity -
+          (discount / 100) * (price * quantity) +
+          (gst / 100) * (price * quantity);
+
+        invoiceItems.push({
+          item,
+          quantity,
+          price,
+          discount,
+          gst,
+
+          total,
+        });
+
+        updateInvoiceTable();
+        updateTotalAmount();
+        resetForm();
+      }
+
+      function updateInvoiceTable() {
+        const invoiceTable = document.getElementById("invoiceItems");
+        invoiceTable.innerHTML = "";
+
+        invoiceItems.forEach((item) => {
+          const row = invoiceTable.insertRow();
+          row.innerHTML = `
+      <td>${item.item}</td>
+      <td>${item.quantity}</td>
+      <td>${item.price}</td>
+      <td>${item.gst}</td>
+      <td>${item.discount}</td>
+      <td>${item.total}</td>
+    `;
+        });
+      }
+
+      function updateTotalAmount() {
+        const totalAmountElement = document.getElementById("totalAmount");
+        const totalAmount = invoiceItems.reduce(
+          (sum, item) => sum + item.total,
+          0
+        );
+        totalAmountElement.textContent = totalAmount.toFixed(2);
+      }
+
+      function resetForm() {
+        document.getElementById("item").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("gst").value = "";
+        document.getElementById("discount").value = "";
+      }
+    </script>
+  </body>
+</html>

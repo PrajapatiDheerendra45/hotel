@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        /* body {
+            background-color:powderblue;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200vh;
+            margin: 0;
+        } */
+
+        .custom-form-control {
+            background-color: #f9f7f7;
+            color: black;
+            border: 1px solid #080808;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .custom-form-group {
+            margin-bottom: 20px;
+        }
+
+        .custom-row-cols-2 .custom-form-group {
+            padding-right: 15px;
+        }
+
+        .custom-row-cols-2 .custom-form-group:last-child {
+            padding-right: 0;
+        }
+
+        .custom-card {
+            max-width: 600px;
+            width: 100%;
+            background-color:#afbde9;
+            border-radius: 10px;
+        }
+
+        .custom-card-body {
+            padding: 30px;
+        }
+
+        .custom-page-title {
+            margin: 0;
+            text-align: center;
+            color: #ffffff;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .custom-gen-label {
+            color: #ffffff;
+        }
+
+        .custom-gender-select label {
+            margin-right: 15px;
+        }
+
+        .custom-profile-upload {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+        }
+
+        .custom-profile-upload img {
+            max-width: 80px;
+            height: auto;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .custom-submit-btn {
+            background-color: #030818;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 104%;
+        }
+
+        .custom-submit-btn:hover {
+            background-color: #08014ef5;
+        }
+
+        /* Hover effects for input fields */
+        .custom-form-control:hover {
+            background-color: powderblue;
+            border-color: #004fb3;
+        }
+
+        /* Hover effects for submit button */
+        .custom-submit-btn:hover {
+            background-color: #0854be;
+        }
+        .custom-gender-select{
+            background-color: #3d3d3d;
+            border-color: #004fb3;
+        }
+        
+
+    </style>
+</head>
+
+<body>
+    <div class="custom-card rounded shadow border-0">
+        <div class="custom-card-body p-5">
+            <h4 class="custom-page-title">Payment Status</h4>
+            <form>
+
+                    <div class="custom-col">
+                        <div class="custom-form-group">
+                            <label>Transaction Id<span class="text-danger">*</span></label>
+                            <input class="custom-form-control" type="text">
+                        </div>
+                    </div>
+
+                    <div class="custom-row custom-row-cols-2">
+                        <div class="custom-col">
+                            <div class="custom-form-group">
+                                <label> Name <span class="text-danger">*</span></label>
+                                <input class="custom-form-control" type="text">
+                            </div>
+                         </div>
+
+                    <div class="custom-col">
+                        <div class="custom-form-group">
+                            <label>Payment Date</label>
+                            <div class="cal-icon">
+                                <input type="text" class="custom-form-control datetimepicker" id="dateOfBirth">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-col">
+                        <div class="custom-form-group">
+                            <label>Total Amount<span class="text-danger">*</span></label>
+                            <input class="custom-form-control" type="text">
+                        </div>
+                    </div>
+
+                  
+
+                    <div class="custom-col">
+                    <label for="payment_method">Payment Method:</label>
+                            <select name="payment_method" id="payment_method">
+                                <option value="cash">Cash</option>
+                                <option value="cheque">Cheque</option>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="debit_card">Debit Card</option>
+                                <option value="netbanking">Netbanking</option>
+                                <option value="insurance">Insurance</option>
+                            </select>
+                    </div> 
+                    <br> 
+                    <div>
+                         <label for="payment_method">Payment Status :</label>
+                        <select name="paymen_staus" id="paymen_staus">
+                            <option value="cash">Complete</option>
+                            <option value="cheque">Pending</option>
+                        </select>
+                    </div>
+                    <br>    
+                     <div " >
+                     <input style="background-color: green;width: 120px;border-radius: 5px;margin-left: 80px;" type="submit" value="Submit">
+                      <button  style="background-color: red;width: 120px;border-radius: 5px;margin-left: 20px;" class="invoice-mah_btn" onClick="window.location.reload()">
+                      Cancel
+                     </button>
+                     </div> 
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Flatpickr for the "Date of Birth" input field
+        const dateOfBirthInput = document.getElementById('dateOfBirth');
+        flatpickr(dateOfBirthInput, {
+            dateFormat: 'Y-m-d', // Adjust the date format if needed
+            theme: 'dark' // Use 'light' or 'dark' as per your design
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initialscale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+  </head>
+  <body>
+    <input
+      id="enterDemo"
+      type="text"
+      onkeypress="return enterKeyPressed(event)"
+    />
+    <script>
+      function enterKeyPressed(event) {
+        if (event.keyCode == 13) {
+          console.log("Enter key is pressed");
+          return true;
+        } else {
+          return false;
+        }
+      }
+    </script>
+  </body>
+</html>

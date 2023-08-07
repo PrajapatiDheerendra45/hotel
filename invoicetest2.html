@@ -1,0 +1,1035 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Billing</title>
+    <style>
+      /* CSS styles for the invoice form */
+
+      * {
+        border: 0;
+        font-family: "Merriweather", serif !important;
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+      }
+      .invoice-billingtable {
+        font-size: 75%;
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 2px;
+      }
+
+      .invoice-body {
+        box-sizing: border-box;
+        min-height: 11in;
+        margin: 0 auto;
+        padding: 0 0.5in;
+        width: 8.5in;
+        background: #fff;
+        border-radius: 1px;
+        box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+      }
+      .meta,
+      .balance {
+        float: right;
+        width: 40%;
+      }
+      .meta:after,
+      .balance:after {
+        clear: both;
+        content: "";
+        display: table;
+      }
+      .left_info {
+        width: 60%;
+        display: inline-block;
+      }
+      .min_height {
+        min-height: 283px;
+      }
+
+      .invoice-mah_btn {
+        background-position: 0% 0%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 0.5em;
+        border-color: #0076a3;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        background-image: -webkit-linear-gradient(#00adee 5%, #0078a5 100%);
+        background-color: #9af;
+        background-repeat: repeat;
+        background-attachment: scroll;
+      }
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact;
+        }
+
+        .invoice-mah-btn1,
+        .body {
+          box-shadow: none;
+          margin: 0;
+        }
+
+        .input.clientDetails {
+          border-bottom: none;
+        }
+      }
+
+      .invoice-mah-btn1,
+      .invoice-mah_btn {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 19px;
+        border-radius: 3px;
+      }
+      .invoice-left-btn {
+        width: 50%;
+        float: left;
+      }
+
+      @media print {
+        .noprint {
+          display: none !important;
+        }
+        .invoice-mah-btn1,
+        .input.clientDetails {
+          border-bottom: none;
+        }
+
+        .clientDetails {
+          width: 200px;
+          border-bottom: none;
+          margin-bottom: 1px;
+        }
+        .invoice-mah-btn1,
+        .invoice-left-btn {
+          display: none;
+        }
+      }
+      .clientDetails {
+        width: 400px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 3px;
+        font-size: 15px;
+      }
+
+      .invoice-container {
+        width: 700px;
+        height: 1100px;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .label {
+        display: inline;
+        margin: 0px;
+      }
+
+      #total {
+        font-weight: bold;
+      }
+      .roomA {
+        position: inline;
+      }
+      #amount,
+      #Room_Quantity,
+      #Food_amount,
+      #discount,
+      #gst,
+      #food_quantity,
+      #seclectgst,
+      #cgst,
+      #sgst {
+        width: 60px;
+        color: black;
+      }
+
+      .invoice-th,
+      .invoice-td {
+        border-width: 1px;
+        padding: 0.5em;
+        position: relative;
+        text-align: left;
+        border-radius: 0.25em;
+        border-style: solid;
+      }
+      .invoice-th {
+        background: #eee;
+        border-color: #bbb;
+      }
+      .invoice-td {
+        border-color: #ddd;
+      }
+    </style>
+  </head>
+  <body class="invoice-body">
+    <div class="invoice-container">
+      <h3
+        style="
+          width: 550px;
+          text-align: center;
+          background-color: black;
+          color: white;
+          padding: 15px;
+          border-radius: 5px;
+        "
+      >
+        Billing From
+      </h3>
+      <img src="white-logo.png" />
+      <form class="invoicebody">
+        <div class="left_info">
+          <input
+            type="text"
+            class="clientDetails"
+            id="company_name"
+            placeholder="Company Name"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="customer_name"
+            placeholder="Address"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="occupation"
+            placeholder="Contact Person"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="afm"
+            placeholder="Contact No"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="doy"
+            placeholder="Email"
+          />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <h3
+          style="
+            width: 550px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+          "
+        >
+          Billing To
+        </h3>
+        <br />
+        <br />
+        <br />
+        <div class="left_info">
+          <input
+            type="text"
+            class="clientDetails"
+            id="company_name"
+            placeholder="Customer Name"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="customer_name"
+            placeholder="Address"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="occupation"
+            placeholder="Contact Person"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="afm"
+            placeholder="Contact No"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="doy"
+            placeholder="Email"
+          />
+        </div>
+        <table class="meta" id="top_data_table">
+          <tbody>
+            <tr class="" id="invoice_number_row">
+              <th class="invoice-th">
+                <span class="invoice" id="invoice">Invoice&nbsp;No</span>
+              </th>
+              <td id="invoicenumber"></td>
+            </tr>
+
+            <tr id="daterow">
+              <th class="invoice-th">
+                <span class="date" id="date">Date</span>
+              </th>
+              <td class="invoice-td">
+                <span contenteditable=""
+                  ><input type="date" id="theDate"
+                /></span>
+              </td>
+            </tr>
+            <tr id="daterow">
+              <th class="invoice-th">
+                <span class="time" id="time">Time</span>
+              </th>
+              <td class="invoice-td">
+                <span contenteditable=""><input type="time" id="time" /></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      <table class="invoice-billingtable">
+        <tr>
+          <th class="invoice-th">
+            <label class="label" for="amount">Room :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="food_quantity"> Quantity :</label>
+          </th>
+
+          <th class="invoice-th">
+            <label class="label" for="Food_amount"> food :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="Room_Quantity "> Quantity :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="discount">Discount(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="gst">IGST(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="sgst">SGST(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="cgst">CGST(%):</label>
+          </th>
+        </tr>
+        <tr>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="amount"
+              class="inputbox"
+              placeholder="Amount"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="Room_Quantity"
+              class="inputbox"
+              placeholder="Quantity"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="Food_amount"
+              class="inputbox"
+              placeholder="Amount"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="food_quantity"
+              class="inputbox"
+              placeholder="Quantity"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="discount"
+              class="inputbox"
+              placeholder="Discount %"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="gst"
+              placeholder="IGST %"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="sgst"
+              placeholder="SGST %"
+              required
+            />
+          </td>
+
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="cgst"
+              placeholder="CGST %"
+              required
+            />
+          </td>
+        </tr>
+      </table>
+      <div>
+        <tr>
+          <label class="label" for="total"
+            >Total (after GST and discount):</label
+          >
+          <div id="total"></div> -->
+<!-- <input type="text" name="" id="" />
+        </tr>
+
+        <tr>
+          <br />
+          <br />
+          <button
+            class="invoice-mah-btn1"
+            onclick="calculateTotal()"
+            style="
+              border-radius: 5px;
+              background-color: black;
+              color: white;
+              width: 100px;
+              height: 30px;
+              font-weight: bold;
+            "
+          >
+            Calculate
+          </button>
+          <br /><br />
+        </tr>
+      </div>
+      <div class="invoice-left-btn">
+        <button class="invoice-mah_btn" onclick="myprint()">Print</button>
+        <button class="invoice-mah_btn" onClick="window.location.reload()">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript function to handle the calculations
+      const minNumber = 1200;
+      const maxNumber = 10000;
+
+      let randnum = Math.floor(
+        Math.random() * (maxNumber - minNumber) + minNumber
+      );
+      console.log(randnum);
+      let invoicenumber = document.getElementById("invoicenumber");
+      invoicenumber.innerText = randnum;
+      function calculateTotal() {
+        let amount = parseFloat(document.getElementById("amount").value);
+        let RoomQuantity = parseFloat(
+          document.getElementById("Room_Quantity").value
+        );
+        amount = amount * RoomQuantity;
+        let Foodamount = parseFloat(
+          document.getElementById("Food_amount").value
+        );
+        let food_quantity = parseFloat(
+          document.getElementById("food_quantity").value
+        );
+        Foodamount = Foodamount * food_quantity;
+        let totalAmountfoodAndRoom = amount + Foodamount;
+        let gstPercentage = parseFloat(document.getElementById("gst").value);
+        let sgst = parseFloat(document.getElementById("sgst").value);
+        let cgst = parseFloat(document.getElementById("cgst").value);
+
+        let discountPercentage = parseFloat(
+          document.getElementById("discount").value
+        );
+        let discountamount =
+          totalAmountfoodAndRoom -
+          (totalAmountfoodAndRoom * discountPercentage) / 100;
+
+        let igst = (discountamount * gstPercentage) / 100;
+        let cgstp = (discountamount * cgst) / 100;
+        let sgstp = (discountamount * sgst) / 100;
+        if (isNaN(igst)) {
+          igst = 0;
+        }
+        if (isNaN(cgstp)) {
+          cgstp = 0;
+        }
+        if (isNaN(sgstp)) {
+          sgstp = 0;
+        }
+
+        totalAmount = igst + cgstp + sgstp + discountamount;
+        document.getElementById(
+          "total"
+        ).innerText = `Total: ${totalAmount.toFixed(2)}`;
+      }
+      function myprint() {
+        window.print();
+      }
+    </script>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Billing</title>
+    <style>
+      /* CSS styles for the invoice form */
+
+      * {
+        border: 0;
+        font-family: "Merriweather", serif !important;
+        font-size: inherit;
+        font-style: inherit;
+        font-weight: inherit;
+      }
+      .invoice-billingtable {
+        font-size: 75%;
+        table-layout: fixed;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 2px;
+      }
+
+      .invoice-body {
+        box-sizing: border-box;
+        min-height: 11in;
+        margin: 0 auto;
+        padding: 0 0.5in;
+        width: 8.5in;
+        background: #fff;
+        border-radius: 1px;
+        box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+      }
+      .meta,
+      .balance {
+        float: right;
+        width: 40%;
+      }
+      .meta:after,
+      .balance:after {
+        clear: both;
+        content: "";
+        display: table;
+      }
+      .left_info {
+        width: 60%;
+        display: inline-block;
+      }
+      .min_height {
+        min-height: 283px;
+      }
+
+      .invoice-mah_btn {
+        background-position: 0% 0%;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        border-radius: 0.5em;
+        border-color: #0076a3;
+        color: #fff;
+        cursor: pointer;
+        font-weight: bold;
+        background-image: -webkit-linear-gradient(#00adee 5%, #0078a5 100%);
+        background-color: #9af;
+        background-repeat: repeat;
+        background-attachment: scroll;
+      }
+      .hide {
+        visibility: hidden;
+      }
+      @media print {
+        * {
+          -webkit-print-color-adjust: exact;
+        }
+
+        .invoice-mah-btn1,
+        .body {
+          box-shadow: none;
+          margin: 0;
+        }
+
+        .input.clientDetails {
+          border-bottom: none;
+        }
+      }
+
+      .invoice-mah-btn1,
+      .invoice-mah_btn {
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 19px;
+        border-radius: 3px;
+      }
+      .invoice-left-btn {
+        width: 50%;
+        float: left;
+      }
+
+      @media print {
+        .noprint {
+          display: none !important;
+        }
+        .invoice-mah-btn1,
+        .input.clientDetails {
+          border-bottom: none;
+        }
+
+        .clientDetails {
+          width: 200px;
+          border-bottom: none;
+          margin-bottom: 1px;
+        }
+        .invoice-mah-btn1,
+        .invoice-left-btn {
+          display: none;
+        }
+      }
+      .clientDetails {
+        width: 400px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 3px;
+        font-size: 15px;
+      }
+
+      .invoice-container {
+        width: 700px;
+        height: 1100px;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .label {
+        display: inline;
+        margin: 0px;
+      }
+
+      #total {
+        font-weight: bold;
+      }
+      .roomA {
+        position: inline;
+      }
+      #amount,
+      #Room_Quantity,
+      #Food_amount,
+      #discount,
+      #gst,
+      #food_quantity,
+      #seclectgst,
+      #cgst,
+      #sgst {
+        width: 60px;
+        color: black;
+      }
+
+      .invoice-th,
+      .invoice-td {
+        border-width: 1px;
+        padding: 0.5em;
+        position: relative;
+        text-align: left;
+        border-radius: 0.25em;
+        border-style: solid;
+      }
+      .invoice-th {
+        background: #eee;
+        border-color: #bbb;
+      }
+      .invoice-td {
+        border-color: #ddd;
+      }
+    </style>
+  </head>
+  <body class="invoice-body">
+    <div class="invoice-container">
+      <h3
+        style="
+          width: 550px;
+          text-align: center;
+          background-color: black;
+          color: white;
+          padding: 15px;
+          border-radius: 5px;
+        "
+      >
+        Billing From
+      </h3>
+      <img src="white-logo.png" />
+      <form class="invoicebody">
+        <div class="left_info">
+          <input
+            type="text"
+            class="clientDetails"
+            id="company_name"
+            placeholder="Company Name"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="customer_name"
+            placeholder="Address"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="occupation"
+            placeholder="Contact Person"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="afm"
+            placeholder="Contact No"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="doy"
+            placeholder="Email"
+          />
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <h3
+          style="
+            width: 550px;
+            text-align: center;
+            background-color: black;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+          "
+        >
+          Billing To
+        </h3>
+        <br />
+        <br />
+        <br />
+        <div class="left_info">
+          <input
+            type="text"
+            class="clientDetails"
+            id="company_name"
+            placeholder="Customer Name"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="customer_name"
+            placeholder="Address"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="occupation"
+            placeholder="Contact Person"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="afm"
+            placeholder="Contact No"
+          /><br />
+          <input
+            type="text"
+            class="clientDetails"
+            id="doy"
+            placeholder="Email"
+          />
+        </div>
+        <table class="meta" id="top_data_table">
+          <tbody>
+            <tr class="" id="invoice_number_row">
+              <th class="invoice-th">
+                <span class="invoice" id="invoice">Invoice&nbsp;No</span>
+              </th>
+              <td id="invoicenumber"></td>
+            </tr>
+
+            <tr id="daterow">
+              <th class="invoice-th">
+                <span class="date" id="date">Date</span>
+              </th>
+              <td class="invoice-td">
+                <span contenteditable=""
+                  ><input type="date" id="theDate"
+                /></span>
+              </td>
+            </tr>
+            <tr id="daterow">
+              <th class="invoice-th">
+                <span class="time" id="time">Time</span>
+              </th>
+              <td class="invoice-td">
+                <span contenteditable=""><input type="time" id="time" /></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </form>
+
+      <table class="invoice-billingtable">
+        <tr>
+          <th class="invoice-th">
+            <label class="label" for="amount">Room :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="food_quantity"> Quantity :</label>
+          </th>
+
+          <th class="invoice-th">
+            <label class="label" for="Food_amount"> food :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="Room_Quantity "> Quantity :</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="discount">Discount(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="gst">IGST(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="sgst">SGST(%):</label>
+          </th>
+          <th class="invoice-th">
+            <label class="label" for="cgst">CGST(%):</label>
+          </th>
+        </tr>
+        <tr>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="amount"
+              class="inputbox"
+              placeholder="Amount"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="Room_Quantity"
+              class="inputbox"
+              placeholder="Quantity"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="Food_amount"
+              class="inputbox"
+              placeholder="Amount"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="food_quantity"
+              class="inputbox"
+              placeholder="Quantity"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              id="discount"
+              class="inputbox"
+              placeholder="Discount %"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="gst"
+              placeholder="IGST %"
+              required
+            />
+          </td>
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="sgst"
+              placeholder="SGST %"
+              required
+            />
+          </td>
+
+          <td class="invoice-td">
+            <input
+              type="text"
+              class="inputbox"
+              id="cgst"
+              placeholder="CGST %"
+              required
+            />
+          </td>
+        </tr>
+      </table>
+      <div>
+        <tr>
+          <label class="label" for="total" style="display: block"
+            >Total (after GST and discount):</label
+          >
+          <!-- <div id="total"></div> -->
+          <label class="hide" id="total" for="total" style="font-weight: bold"
+            >Total:
+          </label>
+          <input class="hide" id="total" type="text" disabled />
+        </tr>
+
+        <!-- <tr>
+          <br />
+          <br />
+          <button
+            class="invoice-mah-btn1"
+            onclick="calculateTotal()"
+            style="
+              border-radius: 5px;
+              background-color: black;
+              color: white;
+              width: 100px;
+              height: 30px;
+              font-weight: bold;
+            "
+          >
+            Calculate
+          </button>
+          <br /><br />
+        </tr> -->
+      </div>
+      <div class="invoice-left-btn">
+        <button class="invoice-mah_btn" onclick="myprint()">Print</button>
+        <button class="invoice-mah_btn" onClick="window.location.reload()">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // JavaScript function to handle the calculations
+      const minNumber = 1200;
+      const maxNumber = 10000;
+
+      let randnum = Math.floor(
+        Math.random() * (maxNumber - minNumber) + minNumber
+      );
+      console.log(randnum);
+      let invoicenumber = document.getElementById("invoicenumber");
+      invoicenumber.innerText = randnum;
+      let inputClass = document.querySelectorAll(".invoice-td");
+      inputClass.forEach((element) => {
+        element.addEventListener("input", calculateTotal);
+      });
+      let totalInput = document.querySelectorAll("#total");
+      function calculateTotal() {
+        let amount = parseFloat(document.getElementById("amount").value);
+        let RoomQuantity = parseFloat(
+          document.getElementById("Room_Quantity").value
+        );
+        // console.log("Alok");  // for checking purpose
+        if (isNaN(RoomQuantity)) {
+          RoomQuantity = 1;
+        }
+        amount = amount * RoomQuantity;
+        let Foodamount = parseFloat(
+          document.getElementById("Food_amount").value
+        );
+        let food_quantity = parseFloat(
+          document.getElementById("food_quantity").value
+        );
+        if (isNaN(Foodamount) && isNaN(food_quantity)) Foodamount = 0;
+        else if (isNaN(food_quantity)) Foodamount = Foodamount;
+        else Foodamount = Foodamount * food_quantity;
+
+        let totalAmountfoodAndRoom = amount + Foodamount;
+        // console.log(amount+" "+totalAmountfoodAndRoom)  // for checking purpose
+        let gstPercentage = parseFloat(document.getElementById("gst").value);
+        let sgst = parseFloat(document.getElementById("sgst").value);
+        let cgst = parseFloat(document.getElementById("cgst").value);
+
+        let discountPercentage = parseFloat(
+          document.getElementById("discount").value
+        );
+        let discountamount = totalAmountfoodAndRoom;
+        if (!isNaN(discountPercentage)) {
+          discountamount =
+            totalAmountfoodAndRoom -
+            (totalAmountfoodAndRoom * discountPercentage) / 100;
+        }
+
+        let igst = (discountamount * gstPercentage) / 100;
+        let cgstp = (discountamount * cgst) / 100;
+        let sgstp = (discountamount * sgst) / 100;
+        if (isNaN(igst)) {
+          igst = 0;
+        }
+        if (isNaN(cgstp)) {
+          cgstp = 0;
+        }
+        if (isNaN(sgstp)) {
+          sgstp = 0;
+        }
+
+        totalAmount = igst + cgstp + sgstp + discountamount;
+        if (!isNaN(totalAmount)) {
+          // document.getElementById(
+          // "total"
+          // ).innerText = `Total: ${totalAmount.toFixed(2)}`;
+          totalInput.forEach((element) => {
+            element.removeAttribute("class", "hide");
+          });
+          totalInput[1].value = totalAmount.toFixed(2);
+        } else {
+          totalInput.forEach((element) =>
+            element.setAttribute("class", "hide")
+          );
+          // document.getElementById(
+          // "total"
+          // ).innerText = "";
+        }
+      }
+      function myprint() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>

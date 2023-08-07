@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        padding: 8px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="generateInvoice()">Generate Invoice</button>
+    <script>
+      function generateInvoice() {
+        // In a real application, you'd implement server-side code to process the invoice data.
+        // For this example, we will just show an alert with the invoice data.
+        const invoiceData = {
+          items: itemList,
+          total: totalElement.textContent,
+        };
+        alert(JSON.stringify(invoiceData, null, 2));
+      }
+    </script>
+  </body>
+</html>
